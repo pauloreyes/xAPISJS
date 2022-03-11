@@ -13,7 +13,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay) => {
   const xAPIstatement = {
     "actor" : {
       "name": jsname,
-      "openid": `https:\\suth.com\employeeID:${jsID}`
+      "openid": "https://suth.com/employeeID" + jsID
     },
     "verb" : {
       "id": verbID,
