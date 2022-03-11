@@ -1,7 +1,7 @@
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay) => {
-  //const player = GetPlayer();
-  //let jsname = player.GetVar('uName');
-  //let jsemail = player.GetVar('uEmail');
+  const player = GetPlayer();
+  let jsname = player.GetVar('uName');
+  let jsID = player.GetVar('uID');
 
   let conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
@@ -12,12 +12,12 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay) => {
 
   const xAPIstatement = {
     "actor" : {
-      "name": "jsname",
-      "openid": "http://suth.com/712082",
+      "name": jsname,
+      "openid": `https:\\suth.com\employeeID:${jsID}`
     },
     "verb" : {
       "id": verbID,
-      "display": { "en-us": verbDisplay},
+      "display": { "en-us": verbDisplay}
     },
     "object" : {
       "id": objId,
