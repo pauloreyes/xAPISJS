@@ -1,4 +1,4 @@
-let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname) => {
+let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, durTime) => {
   //const player = GetPlayer();
   //let jsname = player.GetVar('uName');
   //let jsemail = player.GetVar('uEmail');
@@ -36,7 +36,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
         "objectType": "Activity"
     },
     "result": {
-        "duration": "P3Y6M4DT12H30M5S"
+        "duration": durTime
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
