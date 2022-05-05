@@ -34,6 +34,9 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
             }
         },
         "objectType": "Activity"
+    },
+    "result": {
+        "duration": "P3Y6M4DT12H30M5S"
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
