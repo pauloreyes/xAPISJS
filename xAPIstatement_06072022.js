@@ -104,4 +104,5 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
         };
     console.log('Function executed');
     console.log(xDuration);
+    
 };
