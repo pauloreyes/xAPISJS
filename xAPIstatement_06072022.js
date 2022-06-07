@@ -74,7 +74,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
     }
   };
   
-  switch (timeMeasured) {
+  switch (timeMeasured.toLowerCase()) {
     case 'course':
         xDuration = convertToIso(courseTimer);
         break;
