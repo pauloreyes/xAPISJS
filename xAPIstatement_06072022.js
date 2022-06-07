@@ -38,7 +38,7 @@ const timeManager = {
     },
 };
 
-window.setInterval (timeControl(), 1000);
+window.setInterval(timeControl(), 1000);
 
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, durTime) => {
