@@ -72,8 +72,8 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
       return `PT${seconds}S`;
     }
   };
-
-  xDuration = convertToIso(`${timeMeasured}Timer`);
+  let toConvert = `${timeMeasured}Timer`;
+  xDuration = convertToIso(toConvert);
 
   const xAPIstatement = {
 
