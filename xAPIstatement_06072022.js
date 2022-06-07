@@ -42,6 +42,27 @@ const timeManager = {
 
 window.setInterval(timeControl, 1000);
 
+const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
+    let timeConverter = (timeInSeconds) => {
+        let seconds = timeInSeconds;
+            if (seconds > 60) {
+                if (seconds > 3600) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                seconds = (seconds % 3600) % 60;
+                xDuration = `PT${hours}H${minutes}M${seconds}S`;
+                } else {
+                const minutes = Math.floor(seconds / 60);
+                seconds %= 60;
+                xDuration = `PT${minutes}M${seconds}S`;
+                console.log(xDuration);
+                }
+            } else {
+                xDuration = `PT${seconds}S`;
+                console.log(xDuration);
+            };
+        };
+
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, convertedTime) => {
   const player = GetPlayer();
@@ -85,23 +106,5 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
-    let timeConverter = (timeInSeconds) => {
-        let seconds = timeInSeconds;
-            if (seconds > 60) {
-                if (seconds > 3600) {
-                const hours = Math.floor(seconds / 3600);
-                const minutes = Math.floor((seconds % 3600) / 60);
-                seconds = (seconds % 3600) % 60;
-                xDuration = `PT${hours}H${minutes}M${seconds}S`;
-                } else {
-                const minutes = Math.floor(seconds / 60);
-                seconds %= 60;
-                xDuration = `PT${minutes}M${seconds}S`;
-                }
-            } else {
-                xDuration = `PT${seconds}S`;
-            };
-        };
     console.log('Function executed');
-    console.log(xDuration);
 };
