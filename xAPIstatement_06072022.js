@@ -5,7 +5,6 @@ var slideTimer = 0;//tracks how much time the user spends in one slide
 var activityTimer = 0;//tracks how muct time the user spends in an activity
 
 var xDuration;
-var toConvert;
 
 var courseActiveState = false;
 var slideActiveState = false;
