@@ -54,7 +54,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
   };
   
   ADL.XAPIWrapper.changeConfig(conf);
-  xDuration = convertToIso(`${timeMeasured}Timer`);
+    
   let convertToIso = (secondsVar) => {
     let seconds = secondsVar;
     if (seconds > 60) {
@@ -72,6 +72,8 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
       return `PT${seconds}S`;
     }
   };
+
+  xDuration = convertToIso(`${timeMeasured}Timer`);
 
   const xAPIstatement = {
 
