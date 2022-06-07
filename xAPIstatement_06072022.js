@@ -4,6 +4,8 @@ var courseTimer = 0;//tracks how much time the user spends taking the course
 var slideTimer = 0;//tracks how much time the user spends in one slide
 var activityTimer = 0;//tracks how muct time the user spends in an activity
 
+var xDuration;
+
 var courseActiveState = false;
 var slideActiveState = false;
 var activityActiveState = false;
@@ -41,7 +43,7 @@ const timeManager = {
 window.setInterval(timeControl, 1000);
 
 //xAPI Statement
-let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, durTime) => {
+let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, convertedTime) => {
   const player = GetPlayer();
   let jsname = player.GetVar('uName');
   let jsemail = player.GetVar('uEmail');
@@ -79,9 +81,27 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
         "objectType": "Activity"
     },
     "result": {
-        "duration": durTime
+        "duration": convertedTime
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
+    let timeConverter = (timeInSeconds) => {
+        let seconds = timeInSeconds;
+            if (seconds > 60) {
+                if (seconds > 3600) {
+                const hours = Math.floor(seconds / 3600);
+                const minutes = Math.floor((seconds % 3600) / 60);
+                seconds = (seconds % 3600) % 60;
+                xDuration = `PT${hours}H${minutes}M${seconds}S`;
+                } else {
+                const minutes = Math.floor(seconds / 60);
+                seconds %= 60;
+                xDuration = `PT${minutes}M${seconds}S`;
+                }
+            } else {
+                xDuration = `PT${seconds}S`;
+            };
+        };
     console.log('Function executed');
+    console.log(xDuration);
 };
