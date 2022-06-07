@@ -42,8 +42,7 @@ const timeManager = {
 
 window.setInterval(timeControl, 1000);
 
-const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
-    let timeConverter = (timeInSeconds) => {
+let timeConverter = (timeInSeconds) => {
         let seconds = timeInSeconds;
             if (seconds > 60) {
                 if (seconds > 3600) {
