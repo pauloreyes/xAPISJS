@@ -55,6 +55,23 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
   
   ADL.XAPIWrapper.changeConfig(conf);
   xDuration = convertToIso(`${timeMeasured}Timer`);
+  let convertToIso = (secondsVar) => {
+    let seconds = secondsVar;
+    if (seconds > 60) {
+      if (seconds > 3600) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        seconds = (seconds % 3600) % 60;
+        return `PT${hours}H${minutes}M${seconds}S`;
+      } else {
+        const minutes = Math.floor(seconds / 60);
+        seconds %= 60;
+        return `PT${minutes}M${seconds}S`;
+      }
+    } else {
+      return `PT${seconds}S`;
+    }
+  };
 
   const xAPIstatement = {
 
@@ -86,22 +103,5 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
-    let convertToIso = (secondsVar) => {
-        let seconds = secondsVar;
-        if (seconds > 60) {
-          if (seconds > 3600) {
-            const hours = Math.floor(seconds / 3600);
-            const minutes = Math.floor((seconds % 3600) / 60);
-            seconds = (seconds % 3600) % 60;
-            return `PT${hours}H${minutes}M${seconds}S`;
-          } else {
-            const minutes = Math.floor(seconds / 60);
-            seconds %= 60;
-            return `PT${minutes}M${seconds}S`;
-          }
-        } else {
-          return `PT${seconds}S`;
-        }
-      };
     console.log('Function executed');
 };
