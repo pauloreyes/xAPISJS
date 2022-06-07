@@ -73,8 +73,20 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
       return `PT${seconds}S`;
     }
   };
-  toConvert = `${timeMeasured}Timer`;
-  xDuration = convertToIso(toConvert);
+  
+  switch (timeMeasured) {
+    case 'course':
+        xDuration = convertToIso(courseTimer);
+        break;
+    case 'slide':
+        xDuration = convertToIso(slideTimer);
+        break;
+    case 'activity':
+        xDuration = convertToIso(activityTimer);
+        break;
+    default:
+        console.log('Error encountered while determining what to convert');
+  }
 
   const xAPIstatement = {
 
