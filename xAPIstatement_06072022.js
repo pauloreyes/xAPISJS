@@ -8,8 +8,6 @@ var courseActiveState = false;
 var slideActiveState = false;
 var activityActiveState = false;
 
-window.setInterval (timeControl(), 1000);
-
 var timeControl = () => {
     if (courseActiveState === true) {
         courseTimer += 1;
@@ -39,6 +37,8 @@ const timeManager = {
         "reset": () => {activityTimer = 0},
     },
 };
+
+window.setInterval (timeControl(), 1000);
 
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, durTime) => {
