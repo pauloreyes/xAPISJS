@@ -42,28 +42,8 @@ const timeManager = {
 
 window.setInterval(timeControl, 1000);
 
-let timeConverter = (timeInSeconds) => {
-        let seconds = timeInSeconds;
-            if (seconds > 60) {
-                if (seconds > 3600) {
-                const hours = Math.floor(seconds / 3600);
-                const minutes = Math.floor((seconds % 3600) / 60);
-                seconds = (seconds % 3600) % 60;
-                xDuration = `PT${hours}H${minutes}M${seconds}S`;
-                } else {
-                const minutes = Math.floor(seconds / 60);
-                seconds %= 60;
-                xDuration = `PT${minutes}M${seconds}S`;
-                console.log(xDuration);
-                }
-            } else {
-                xDuration = `PT${seconds}S`;
-                console.log(xDuration);
-            };
-        };
-
 //xAPI Statement
-let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, convertedTime) => {
+let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured) => {
   const player = GetPlayer();
   let jsname = player.GetVar('uName');
   let jsemail = player.GetVar('uEmail');
@@ -74,6 +54,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
   };
   
   ADL.XAPIWrapper.changeConfig(conf);
+  xDuration = convertToIso(`${timeMeasured}Timer`);
 
   const xAPIstatement = {
 
@@ -105,5 +86,22 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
+    let convertToIso = (secondsVar) => {
+        let seconds = secondsVar;
+        if (seconds > 60) {
+          if (seconds > 3600) {
+            const hours = Math.floor(seconds / 3600);
+            const minutes = Math.floor((seconds % 3600) / 60);
+            seconds = (seconds % 3600) % 60;
+            return `PT${hours}H${minutes}M${seconds}S`;
+          } else {
+            const minutes = Math.floor(seconds / 60);
+            seconds %= 60;
+            return `PT${minutes}M${seconds}S`;
+          }
+        } else {
+          return `PT${seconds}S`;
+        }
+      };
     console.log('Function executed');
 };
