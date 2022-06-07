@@ -82,7 +82,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
         "objectType": "Activity"
     },
     "result": {
-        "duration": convertedTime
+        "duration": xDuration
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
