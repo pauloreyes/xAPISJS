@@ -54,7 +54,7 @@ window.setInterval(timeControl, 1000);
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
     const conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
-    "auth" : "Basic " + toBase64("tolaha:muzojs")
+    "auth" : "Basic " + btoa("tolaha:muzojs")
   };
   
   ADL.XAPIWrapper.changeConfig(conf);
