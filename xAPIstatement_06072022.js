@@ -1,7 +1,5 @@
 //Initial Declaration
 const player = GetPlayer();
-var jsname = player.GetVar('uName');
-var jsemail = 'mailto:' + player.GetVar('uEmail');
 
 //Timer function
 
@@ -52,6 +50,9 @@ window.setInterval(timeControl, 1000);
 
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
+    var jsname = player.GetVar('uName');
+    var jsemail = 'mailto:' + player.GetVar('uEmail');
+    
     const conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
     "auth" : "Basic " + btoa("tolaha:muzojs")
