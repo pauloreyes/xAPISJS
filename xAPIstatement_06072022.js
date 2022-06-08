@@ -19,34 +19,31 @@ var timeControl = () => {
     if (courseActiveState === true) {
         courseTimer += 1;
         player.SetVar('CourseTimer', courseTimer);
-        console.log('Course Timer Active');
     };
     if (slideActiveState === true) {
         slideTimer += 1;
         player.SetVar('SlideTimer', slideTimer);
-        console.log('Slide Timer Active');
     };
     if (activityActiveState === true) {
         activityTimer += 1;
         player.SetVar('ActivityTimer', activityTimer);
-        console.log('Activity Timer Active');
     };
 };
 
 const timeManager = {
     "course" : {
-        "start": () => {courseActiveState = true},
-        "stop" : () => {courseActiveState = false},
+        "start": () => {courseActiveState = true; console.log('Course Timer Active')},
+        "stop" : () => {courseActiveState = false; console.log('Course Timer Deactivated')},
         "reset": () => {courseTimer = 0; player.SetVar('CourseTimer', courseTimer);},
     },
     "slide" : {
-        "start": () => {slideActiveState = true},
-        "stop" : () => {slideActiveState = false},
+        "start": () => {slideActiveState = true; console.log('Slide Timer Active')},
+        "stop" : () => {slideActiveState = false; ; console.log('Slide Timer Deactivated')},
         "reset": () => {slideTimer = 0; player.SetVar('SlideTimer', slideTimer);},
     },
     "activity" : {
-        "start": () => {activityActiveState = true},
-        "stop" : () => {activityActiveState = false},
+        "start": () => {activityActiveState = true; console.log('Activity Timer Active')},
+        "stop" : () => {activityActiveState = false; console.log('Activity Timer Deactivated')},
         "reset": () => {activityTimer = 0; player.SetVar('ActivityTimer', activityTimer);},
     },
 };
