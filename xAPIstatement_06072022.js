@@ -36,17 +36,17 @@ const timeManager = {
     "course" : {
         "start": () => {courseActiveState = true},
         "stop" : () => {courseActiveState = false},
-        "reset": () => {courseTimer = 0},
+        "reset": () => {courseTimer = 0; player.SetVar('CourseTimer', courseTimer);},
     },
     "slide" : {
         "start": () => {slideActiveState = true},
         "stop" : () => {slideActiveState = false},
-        "reset": () => {courseTimer = 0},
+        "reset": () => {courseTimer = 0; player.SetVar('SlideTimer', slideTimer);},
     },
     "activity" : {
         "start": () => {activityActiveState = true},
         "stop" : () => {activityActiveState = false},
-        "reset": () => {activityTimer = 0},
+        "reset": () => {activityTimer = 0; player.SetVar('ActivityTimer', activityTimer);},
     },
 };
 
