@@ -50,6 +50,7 @@ window.setInterval(timeControl, 1000);
 
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
+    const player = GetPlayer();
     var jsname = player.GetVar('uName');
     var jsemail = 'mailto:' + player.GetVar('uEmail');
     
