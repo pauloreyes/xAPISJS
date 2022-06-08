@@ -1,3 +1,10 @@
+//Initial Declaration
+const player = GetPlayer();
+let jsname = player.GetVar('uName');
+let jsemail = player.GetVar('uEmail');
+sLCourseTimer = player.GetVar('CourseTimer');
+sLSlideTimer = player.GetVar('SlideTimer');
+
 //Timer function
 
 var courseTimer = 0;//tracks how much time the user spends taking the course
@@ -13,12 +20,15 @@ var activityActiveState = false;
 var timeControl = () => {
     if (courseActiveState === true) {
         courseTimer += 1;
+        player.SetVar('CourseTimer', courseTimer);
     };
     if (slideActiveState === true) {
         slideTimer += 1;
+        player.SetVar('SlideTimer', slideTimer);
     };
     if (activityActiveState === true) {
         activityTimer += 1;
+        player.SetVar('ActivityTimer', activityTimer);
     };
 };
 
@@ -44,11 +54,7 @@ window.setInterval(timeControl, 1000);
 
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
-  const player = GetPlayer();
-  let jsname = player.GetVar('uName');
-  let jsemail = player.GetVar('uEmail');
-
-  const conf = {
+    const conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
     "auth" : "Basic " + toBase64("tolaha:muzojs")
   };
