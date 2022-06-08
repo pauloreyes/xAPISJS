@@ -41,7 +41,7 @@ const timeManager = {
     "slide" : {
         "start": () => {slideActiveState = true},
         "stop" : () => {slideActiveState = false},
-        "reset": () => {courseTimer = 0; player.SetVar('SlideTimer', slideTimer);},
+        "reset": () => {slideTimer = 0; player.SetVar('SlideTimer', slideTimer);},
     },
     "activity" : {
         "start": () => {activityActiveState = true},
