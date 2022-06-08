@@ -1,5 +1,7 @@
 //Initial Declaration
 const player = GetPlayer();
+var jsname;
+var jsemail;
 
 //Timer function
 
