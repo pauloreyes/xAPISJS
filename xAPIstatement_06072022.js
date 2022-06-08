@@ -5,7 +5,7 @@ let jsemail = player.GetVar('uEmail');
 
 //Timer function
 
-var courseTimer = 0;//tracks how much time the user spends taking the course
+var courseTimer = 1;//tracks how much time the user spends taking the course
 var slideTimer = 0;//tracks how much time the user spends in one slide
 var activityTimer = 0;//tracks how muct time the user spends in an activity
 
