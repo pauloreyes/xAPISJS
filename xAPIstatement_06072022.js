@@ -1,7 +1,7 @@
 //Initial Declaration
 const player = GetPlayer();
-var jsname;
-var jsemail;
+var jsname = player.GetVar('uName');
+var jsemail = 'mailto:' + player.GetVar('uEmail');
 
 //Timer function
 
