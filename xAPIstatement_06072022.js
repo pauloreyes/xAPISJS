@@ -19,14 +19,17 @@ var timeControl = () => {
     if (courseActiveState === true) {
         courseTimer += 1;
         player.SetVar('CourseTimer', courseTimer);
+        console.log('Course Timer Active');
     };
     if (slideActiveState === true) {
         slideTimer += 1;
         player.SetVar('SlideTimer', slideTimer);
+        console.log('Slide Timer Active');
     };
     if (activityActiveState === true) {
         activityTimer += 1;
         player.SetVar('ActivityTimer', activityTimer);
+        console.log('Activity Timer Active');
     };
 };
 
