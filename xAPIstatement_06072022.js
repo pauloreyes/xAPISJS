@@ -43,12 +43,12 @@ const timeManager = {
 window.setInterval(timeControl, 1000);
 
 //xAPI Statement
-let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured) => {
+let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
   const player = GetPlayer();
   let jsname = player.GetVar('uName');
   let jsemail = player.GetVar('uEmail');
 
-  let conf = {
+  const conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
     "auth" : "Basic " + toBase64("tolaha:muzojs")
   };
@@ -114,15 +114,15 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
     },
     "result": {
         "score": {
-            "scaled": 1,
-            "raw": 80,
+            "scaled": scorePercent,
+            "raw": scoreNum,
             "min": 0,
-            "max": 100
+            "max": scoreMax
         },
-        "success": true,
-        "completion": true,
-        "response": "lorem ipsum",
-        "duration": "PT2H2M2S"
+        "success": successStatus,
+        "completion": completionStatus,
+        "response": submittedResponse,
+        "duration": xDuration
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
