@@ -1,12 +1,11 @@
 //Initial Declaration
- 
-let initialDeclaration = () => {
-    let player = GetPlayer();
-    let jsname = player.GetVar('uName');
-    let jsemail = 'mailto:' + player.GetVar('uEmail');
-};
 
-initialDeclaration();
+let player = GetPlayer();
+let jsname = player.GetVar('uName');
+let jsemail = 'mailto:' + player.GetVar('uEmail');
+console.log(jsname);
+console.log(jsemail);
+
 //Timer function
 
 var courseTimer = 1;//tracks how much time the user spends taking the course
@@ -56,7 +55,6 @@ window.setInterval(timeControl, 1000);
 
 //xAPI Statement
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
-    
     const conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
     "auth" : "Basic " + btoa("tolaha:muzojs")
