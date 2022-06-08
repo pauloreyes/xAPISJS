@@ -113,7 +113,14 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
         "objectType": "Activity"
     },
     "result": {
-        "duration": xDuration
+        "score": {
+            "scaled": 100,
+            "raw": 7
+        },
+        "success": true,
+        "completion": true,
+        "response": "lorem ipsum",
+        "duration": "PT2H2M2S"
     }
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
