@@ -2,8 +2,6 @@
 const player = GetPlayer();
 let jsname = player.GetVar('uName');
 let jsemail = player.GetVar('uEmail');
-sLCourseTimer = player.GetVar('CourseTimer');
-sLSlideTimer = player.GetVar('SlideTimer');
 
 //Timer function
 
@@ -133,4 +131,15 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
 }
     const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
     console.log('Function executed');
+};
+
+let queryFunction = () => {
+    ADL.XAPIWrapper.changeConfig(conf);
+    const params = ADL.XAPIWrapper.searchParams();
+
+    params['agent'] = '{"mbox": "mailto:paulo.reyes@gmail.com}';
+    params['verb'] = 'https://clicked.com';
+    params['activity'] = 'https://object.com';
+
+    const xAPIQuery = ADL.XAPIWrapper.getStatements(params);
 };
