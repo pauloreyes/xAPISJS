@@ -138,6 +138,11 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
 };
 
 let queryFunction = () => {
+    const conf = {
+        "endpoint" : "https://xapi-test99.lrs.io/xapi/",
+        "auth" : "Basic " + btoa("tolaha:muzojs")
+      };
+      
     ADL.XAPIWrapper.changeConfig(conf);
     const params = ADL.XAPIWrapper.searchParams();
 
