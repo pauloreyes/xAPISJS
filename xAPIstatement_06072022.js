@@ -114,7 +114,7 @@ let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, u
     },
     "result": {
         "score": {
-            "scaled": 100,
+            "scaled": 1,
             "raw": 7
         },
         "success": true,
