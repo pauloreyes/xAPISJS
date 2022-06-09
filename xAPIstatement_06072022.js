@@ -9,8 +9,7 @@ let jsemail;
 var courseTimer = 1;//tracks how much time the user spends taking the course
 var slideTimer = 0;//tracks how much time the user spends in one slide
 var activityTimer = 0;//tracks how muct time the user spends in an activity
-
-var xDuration;
+var xDuration; //Reports the tracked duration to the LRS. It can only hole one value (course, slide, or activity) at a time. As such, it is only updated and retrieved when a report needs to be sent to the LRS.
 
 var courseActiveState = false;
 var slideActiveState = false;
@@ -51,7 +50,15 @@ const timeManager = {
 
 window.setInterval(timeControl, 1000);
 
-//xAPI Statement
+document.addEventListener('visibilitychange', windowVisibilityController());
+
+let windowVisibilityController = () => {
+    if (document.visibilityState === 'hidden') {
+        console.log('The window is inactive.');
+    }
+}
+
+//Start of the xAPI Statement function ------------------------------------------>
 let sendXAPI = (verbID, verbDisplay, objId, objDisplay, objDescription, email, uname, timeMeasured, successStatus, completionStatus, submittedResponse, scorePercent, scoreNum, scoreMax) => {
     const conf = {
     "endpoint" : "https://xapi-test99.lrs.io/xapi/",
