@@ -35,17 +35,17 @@ const timeManager = {
     "course" : {
         "start": () => {courseActiveState = true; console.log('Course Timer Active')},
         "stop" : () => {courseActiveState = false; console.log('Course Timer Deactivated')},
-        "reset": () => {courseTimer = 0; player.SetVar('CourseTimer', courseTimer);},
+        "reset": () => {courseTimer = 0; player.SetVar('CourseTimer', courseTimer); console.log('Course Timer Reset')}
     },
     "slide" : {
         "start": () => {slideActiveState = true; console.log('Slide Timer Active')},
         "stop" : () => {slideActiveState = false; ; console.log('Slide Timer Deactivated')},
-        "reset": () => {slideTimer = 0; player.SetVar('SlideTimer', slideTimer);},
+        "reset": () => {slideTimer = 0; player.SetVar('SlideTimer', slideTimer); console.log('Slide Timer Reset')}
     },
     "activity" : {
         "start": () => {activityActiveState = true; console.log('Activity Timer Active')},
         "stop" : () => {activityActiveState = false; console.log('Activity Timer Deactivated')},
-        "reset": () => {activityTimer = 0; player.SetVar('ActivityTimer', activityTimer);},
+        "reset": () => {activityTimer = 0; player.SetVar('ActivityTimer', activityTimer); console.log('Activity Timer Reset')}
     },
 };
 
