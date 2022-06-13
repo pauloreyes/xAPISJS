@@ -1,6 +1,6 @@
 //Initial Declaration
 
-let player = GetPlayer();
+let player;
 let jsname;
 let jsemail;
 let statementsHolder = 'No data query';
@@ -103,7 +103,7 @@ document.addEventListener('visibilitychange', function () {
     console.log('The window is active.');
     if (windowInactiveState === true) {
       timeManager.inactivity.stop();
-      sendXAPI(
+      sendXAPILite(
         'http://id.tincanapi.com/verb/unfocused',
         'Unfocused',
         'The browser',
@@ -111,13 +111,7 @@ document.addEventListener('visibilitychange', function () {
         "The e-learning window was put on the background. It's possible that the learner did something else.",
         jsemail,
         jsname,
-        'inactivity',
-        false,
-        false,
-        '',
-        0,
-        0,
-        0
+        'inactivity'
       );
       timeManager.inactivity.reset();
     }
@@ -234,6 +228,94 @@ let sendXAPI = (
   const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
   console.log('Function executed');
 };
+
+//Start of xAPI Statement lite
+let sendXAPILite = (
+  verbID,
+  verbDisplay,
+  objId,
+  objDisplay,
+  objDescription,
+  email,
+  uname,
+  timeMeasured
+) => {
+  const conf = {
+    endpoint: 'https://xapi-test99.lrs.io/xapi/',
+    auth: 'Basic ' + btoa('tolaha:muzojs'),
+  };
+
+  ADL.XAPIWrapper.changeConfig(conf);
+
+  let convertToIso = (secondsVar) => {
+    let seconds = secondsVar;
+    if (seconds > 60) {
+      if (seconds > 3600) {
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        seconds = (seconds % 3600) % 60;
+        return `PT${hours}H${minutes}M${seconds}S`;
+      } else {
+        const minutes = Math.floor(seconds / 60);
+        seconds %= 60;
+        return `PT${minutes}M${seconds}S`;
+      }
+    } else {
+      return `PT${seconds}S`;
+    }
+  };
+
+  switch (timeMeasured.toLowerCase()) {
+    case 'course':
+      xDuration = convertToIso(courseTimer);
+      break;
+    case 'slide':
+      xDuration = convertToIso(slideTimer);
+      break;
+    case 'activity':
+      xDuration = convertToIso(activityTimer);
+      break;
+    case 'inactivity':
+      xDuration = convertToIso(inactiveWindowTimer);
+      break;
+    default:
+      xDuration = 'No duration tracked';
+      console.log('Error encountered while determining what to convert');
+  }
+
+  const xAPIstatementlite = {
+    actor: {
+      mbox: email,
+      name: uname,
+      objectType: 'Agent',
+    },
+    verb: {
+      id: verbID,
+      display: {
+        'en-US': verbDisplay,
+      },
+    },
+    object: {
+      id: objId,
+      definition: {
+        name: {
+          'en-US': objDisplay,
+        },
+        description: {
+          'en-US': objDescription,
+        },
+      },
+      objectType: 'Activity',
+    },
+    result: {
+      duration: xDuration,
+    },
+  };
+  const result = ADL.XAPIWrapper.sendStatement(xAPIstatementlite);
+  console.log('Function executed');
+};
+
+//-------------End of xAPI Lite--------------------------------//
 
 let queryXAPIData = (queryBy, queryInput) => {
   if (queryBy === 'agent') {
