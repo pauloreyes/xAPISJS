@@ -4,6 +4,17 @@ let player;
 let jsname;
 let jsemail;
 let statementsHolder = 'No data query';
+let xAPIQuery;
+let score1;
+let score2;
+let score3;
+let score4;
+let score5;
+let score6;
+let score7;
+let score8;
+let score9;
+let score10;
 
 //Timer function
 
@@ -103,7 +114,7 @@ document.addEventListener('visibilitychange', function () {
     console.log('The window is active.');
     if (windowInactiveState === true) {
       timeManager.inactivity.stop();
-      sendXAPILite(
+      sendXAPI(
         'http://id.tincanapi.com/verb/unfocused',
         'Unfocused',
         'The browser',
@@ -111,7 +122,11 @@ document.addEventListener('visibilitychange', function () {
         "The e-learning window was put on the background. It's possible that the learner did something else.",
         jsemail,
         jsname,
-        'inactivity'
+        false,
+        false,
+        'inactivity',
+        0,
+        0
       );
       timeManager.inactivity.reset();
     }
@@ -144,7 +159,7 @@ let sendXAPI = (
 
   let scorePercent;
 
-  if (scoreNum === '' || scoreMax === '') {
+  if (scoreNum === 0 || scoreMax === 0) {
     scorePercent = 0;
   } else {
     scorePercent = scoreNum / scoreMax;
@@ -169,6 +184,8 @@ let sendXAPI = (
       return `PT${seconds}S`;
     }
   };
+
+  timeMeasured = timeMeasured.toLowerCase();
 
   switch (timeMeasured.toLowerCase()) {
     case 'course':
@@ -230,7 +247,7 @@ let sendXAPI = (
 };
 
 //Start of xAPI Statement lite
-let sendXAPILite = (
+/*let sendXAPILite = (
   verbID,
   verbDisplay,
   objId,
@@ -238,7 +255,8 @@ let sendXAPILite = (
   objDescription,
   email,
   uname,
-  timeMeasured
+  timeMeasured,
+  submittedResponse
 ) => {
   const conf = {
     endpoint: 'https://xapi-test99.lrs.io/xapi/',
@@ -308,37 +326,19 @@ let sendXAPILite = (
       objectType: 'Activity',
     },
     result: {
+      response: submittedResponse,
       duration: xDuration,
     },
   };
   const result = ADL.XAPIWrapper.sendStatement(xAPIstatementlite);
   console.log('Function executed');
-};
+};*/
 
 //-------------End of xAPI Lite--------------------------------//
 
-let queryXAPIData = (queryBy, queryInput) => {
-  if (queryBy === 'agent') {
-    queryInput = `"mbox": "mailto":${queryInput}`;
-  }
-
-  const conf = {
-    endpoint: 'https://xapi-test99.lrs.io/xapi/',
-    auth: 'Basic ' + btoa('tolaha:muzojs'),
-  };
-
-  ADL.XAPIWrapper.changeConfig(conf);
-
-  const params = ADL.XAPIWrapper.searchParams();
-  params[`'${queryBy}'`] = `'${queryInput}'`;
-  let xAPIQuery = ADL.XAPIWrapper.getStatements(params);
-  statementsHolder = xAPIQuery.statements;
-  console.log(statementsHolder);
-};
-
 //countdown timer functionality
 let countDownStatus = false;
-let cdTime = player.GetVar('CountDown');
+let cdTime; //determines how long the countdown will be
 
 let countDownTimer = () => {
   if (countDownStatus === true && cdTime > 0) {
@@ -368,55 +368,3 @@ let stopCD = () => {
 };
 
 //Leaderboard function
-
-let leaderboardUpdate = () => {
-  const conf = {
-    endpoint: 'https://xapi-test99.lrs.io/xapi/',
-    auth: 'Basic ' + btoa('tolaha:muzojs'),
-  };
-  ADL.XAPIWrapper.changeConfig(conf);
-
-  queryXAPIData('activity', 'http://slide1.7');
-
-  statementsHolder.sort(function (a, b) {
-    return b.result.score.scaled - a.result.score.scaled;
-  });
-
-  for (let i = 0; i < statementsHolder.length; i++) {
-    statementsHolder[i].result.score.scaled =
-      statementsHolder[i].result.score.scaled * 100;
-  }
-
-  player.SetVar('FirstPlace', statementsHolder[0].actor.name);
-  player.SetVar('SecondPlace', statementsHolder[1].actor.name);
-  player.SetVar('ThirdPlace', statementsHolder[2].actor.name);
-  player.SetVar('FourthPlace', statementsHolder[3].actor.name);
-  player.SetVar('FifthPlace', statementsHolder[4].actor.name);
-  player.SetVar('SixthPlace', statementsHolder[5].actor.name);
-  player.SetVar('SeventhPlace', statementsHolder[6].actor.name);
-  player.SetVar('EighthPlace', statementsHolder[7].actor.name);
-  player.SetVar('NinthPlace', statementsHolder[8].actor.name);
-  player.SetVar('TenthPlace', statementsHolder[9].actor.name);
-
-  let score1 = statementsHolder[0].result.score.scaled + '%';
-  let score2 = statementsHolder[1].result.score.scaled + '%';
-  let score3 = statementsHolder[2].result.score.scaled + '%';
-  let score4 = statementsHolder[3].result.score.scaled + '%';
-  let score5 = statementsHolder[4].result.score.scaled + '%';
-  let score6 = statementsHolder[5].result.score.scaled + '%';
-  let score7 = statementsHolder[6].result.score.scaled + '%';
-  let score8 = statementsHolder[7].result.score.scaled + '%';
-  let score9 = statementsHolder[8].result.score.scaled + '%';
-  let score10 = statementsHolder[9].result.score.scaled + '%';
-
-  player.SetVar('Score1', score1);
-  player.SetVar('Score2', score2);
-  player.SetVar('Score3', score3);
-  player.SetVar('Score4', score4);
-  player.SetVar('Score5', score5);
-  player.SetVar('Score6', score6);
-  player.SetVar('Score7', score7);
-  player.SetVar('Score8', score8);
-  player.SetVar('Score9', score9);
-  player.SetVar('Score10', score10);
-};
