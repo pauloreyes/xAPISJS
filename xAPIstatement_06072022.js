@@ -277,3 +277,45 @@ let startCD = () => {
 let stopCD = () => {
   clearInterval(intervalCDMgr);
 };
+
+//Leaderboard function
+
+let leaderboardUpdate = () => {
+  const conf = {
+    endpoint: 'https://xapi-test99.lrs.io/xapi/',
+    auth: 'Basic ' + btoa('tolaha:muzojs'),
+  };
+  ADL.XAPIWrapper.changeConfig(conf);
+
+  queryXAPIData('activity', 'http://slide1.7');
+
+  statementsHolder.sort(function (a, b) {
+    return b.result.score.scaled - a.result.score.scaled;
+  });
+
+  for (let i = 0; i < statements.length; i++) {
+    statementsHolder[i].result.score.scaled =
+      statementsHolder[i].result.score.scaled * 100 + '%';
+  }
+  player.SetVar('FirstPlace', statementsHolder[0].actor.name);
+  player.SetVar('SecondPlace', statementsHolder[1].actor.name);
+  player.SetVar('ThirdPlace', statementsHolder[2].actor.name);
+  player.SetVar('FourthPlace', statementsHolder[3].actor.name);
+  player.SetVar('FifthPlace', statementsHolder[4].actor.name);
+  player.SetVar('SixthPlace', statementsHolder[5].actor.name);
+  player.SetVar('SeventhPlace', statementsHolder[6].actor.name);
+  player.SetVar('EighthPlace', statementsHolder[7].actor.name);
+  player.SetVar('NinthPlace', statementsHolder[8].actor.name);
+  player.SetVar('TenthPlace', statementsHolder[9].actor.name);
+
+  player.SetVar('Score1', statementsHolder[0].result.score.scaled);
+  player.SetVar('Score2', statementsHolder[1].result.score.scaled);
+  player.SetVar('Score3', statementsHolder[2].result.score.scaled);
+  player.SetVar('Score4', statementsHolder[3].result.score.scaled);
+  player.SetVar('Score5', statementsHolder[4].result.score.scaled);
+  player.SetVar('Score6', statementsHolder[5].result.score.scaled);
+  player.SetVar('Score7', statementsHolder[6].result.score.scaled);
+  player.SetVar('Score8', statementsHolder[7].result.score.scaled);
+  player.SetVar('Score9', statementsHolder[8].result.score.scaled);
+  player.SetVar('Score10', statementsHolder[9].result.score.scaled);
+};
