@@ -5,6 +5,8 @@ let jsname;
 let jsemail;
 let statementsHolder = 'No data query';
 
+let score1;
+
 //Timer function
 
 var courseTimer = 1; //tracks how much time the user spends taking the course
@@ -300,10 +302,10 @@ let leaderboardUpdate = () => {
     return b.result.score.scaled - a.result.score.scaled;
   });
 
-  for (let i = 0; i < statementsHolder.length; i++) {
+  /*for (let i = 0; i < statementsHolder.length; i++) {
     statementsHolder[i].result.score.scaled =
       statementsHolder[i].result.score.scaled * 100 + '%';
-  }
+  }*/
 
   player.SetVar('FirstPlace', statementsHolder[0].actor.name);
   player.SetVar('SecondPlace', statementsHolder[1].actor.name);
@@ -315,4 +317,7 @@ let leaderboardUpdate = () => {
   player.SetVar('EighthPlace', statementsHolder[7].actor.name);
   player.SetVar('NinthPlace', statementsHolder[8].actor.name);
   player.SetVar('TenthPlace', statementsHolder[9].actor.name);
+
+  score1 = statementsHolder[0].result.score.scaled;
+  player.SetVar('Score1', score1);
 };
