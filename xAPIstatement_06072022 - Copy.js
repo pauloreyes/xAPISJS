@@ -1,8 +1,8 @@
 //Initial Declaration
 
 let player;
-let jsname = null;
-let jsemail = null;
+let jsname;
+let jsemail;
 let statementsHolder = 'No data query';
 let xAPIQuery;
 let scorePercent;
@@ -233,7 +233,7 @@ let sendXAPI = (
     },
   };
   const result = ADL.XAPIWrapper.sendStatement(xAPIstatement);
-  console.log('Function executed');
+  //console.log('Function executed');
 };
 
 //Start of xAPI Statement lite
@@ -358,6 +358,11 @@ let stopCD = () => {
 //Leaderboard function
 
 let leaderboardUpdate = () => {
+  const conf = {
+    endpoint: 'https://xapi-test99.lrs.io/xapi/',
+    auth: 'Basic ' + btoa('tolaha:muzojs'),
+  };
+
   ADL.XAPIWrapper.changeConfig(conf);
 
   const params = ADL.XAPIWrapper.searchParams();
@@ -390,16 +395,16 @@ let leaderboardUpdate = () => {
   let score9 = statementsHolder[8]?.result?.score?.scaled;
   let score10 = statementsHolder[9]?.result?.score?.scaled;
 
-  player.SetVar('Score1', score1 + '%');
-  player.SetVar('Score2', score2 + '%');
-  player.SetVar('Score3', score3 + '%');
-  player.SetVar('Score4', score4 + '%');
-  player.SetVar('Score5', score5 + '%');
-  player.SetVar('Score6', score6 + '%');
-  player.SetVar('Score7', score7 + '%');
-  player.SetVar('Score8', score8 + '%');
-  player.SetVar('Score9', score9 + '%');
-  player.SetVar('Score10', score10 + '%');
+  player.SetVar('Score1', score1);
+  player.SetVar('Score2', score2);
+  player.SetVar('Score3', score3);
+  player.SetVar('Score4', score4);
+  player.SetVar('Score5', score5);
+  player.SetVar('Score6', score6);
+  player.SetVar('Score7', score7);
+  player.SetVar('Score8', score8);
+  player.SetVar('Score9', score9);
+  player.SetVar('Score10', score10);
 
   player.SetVar('FirstPlace', statementsHolder[0]?.actor?.name ?? 'No entry');
   player.SetVar('SecondPlace', statementsHolder[1]?.actor?.name ?? 'No entry');
